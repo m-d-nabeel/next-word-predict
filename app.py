@@ -2,14 +2,13 @@ from flask import Flask, request, jsonify, render_template
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import numpy as np
-import pickle
+import joblib
 
 app = Flask(__name__)
 
 model = load_model('predict_next_words.keras')
 
-with open('tokenizer', 'rb') as handle:
-    tokenizer = pickle.load(handle)
+tokenizer = joblib.load('tokenizer')
 
 max_length = 71
 
